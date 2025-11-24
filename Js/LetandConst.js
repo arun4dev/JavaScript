@@ -67,3 +67,38 @@ f=1000;
 // SyntaxError: Occurs when there is a mistake in the syntax of the code, such as redeclaring a variable with 'let' or 'const' in the same scope.
 // ReferenceError: Occurs when trying to access a variable that is not declared or is in the temporal dead zone (like accessing 'let' or 'const' before their declaration).
 // TypeError: Occurs when an operation is performed on a value of an inappropriate type, such as trying to reassign a value to a 'const' variable.
+
+
+
+//Block
+// Anything that is given inside a pair of curly braces can be considered as a block. This is used in various constructs like if, for, while, functions, etc.
+// we can use this in a place where js expects a single statement.
+{
+
+}
+
+// Block Scope: when a variable is declared inside a block using let or const, it is only accessible within that block and its nested blocks.
+{
+    let g = 70;
+    const h = 80;
+    console.log("Inside block:", g, h); // 70 80
+}
+
+// example
+{
+    let i = 90;
+    const j = 100;
+    var k = 110; // var is function scoped, not block scoped
+}
+// let and const are block scoped where it cannot be accessed outside the block.
+// once the block is executed, the memory allocated for let and const variables is freed.
+
+// Shadowing:
+// Shadowing occurs when a variable declared within a certain scope (inner scope) has the same name as a variable declared in an outer scope. The inner scope variable "shadows" the outer scope variable.
+let m = 200; // outer scope
+{
+    let m = 300; // inner scope, shadows outer m
+    console.log("Inner m:", m); // 300
+}
+console.log("Outer m:", m); // 200
+// In this example, the inner variable 'm' shadows the outer variable 'm' within the block. When we log 'm' inside the block, it refers to the inner 'm', and outside the block, it refers to the outer 'm'.
