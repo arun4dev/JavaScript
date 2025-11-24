@@ -102,3 +102,10 @@ let m = 200; // outer scope
 }
 console.log("Outer m:", m); // 200
 // In this example, the inner variable 'm' shadows the outer variable 'm' within the block. When we log 'm' inside the block, it refers to the inner 'm', and outside the block, it refers to the outer 'm'.
+
+
+// Illegal shadowing:
+let n=400;
+{
+    //var n=500; // SyntaxError: Identifier 'n' has already been declared
+}
