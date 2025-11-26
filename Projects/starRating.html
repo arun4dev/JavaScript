@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Creative Star Rating</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #1e1e2f, #2b5876);
+            color: white;
+        }
+
+        .rating-container {
+            text-align: center;
+        }
+
+        .stars {
+            display: inline-flex;
+            gap: 10px;
+        }
+
+        .star {
+            font-size: 40px;
+            cursor: pointer;
+            color: #555;
+            transition: transform 0.2s ease, color 0.2s ease, text-shadow 0.3s ease;
+        }
+
+        .star:hover {
+            transform: scale(1.3);
+            color: #ffd166;
+            text-shadow: 0 0 10px #ffd166;
+        }
+
+        .star.filled {
+            color: #f4d03f;
+            text-shadow: 0 0 12px rgba(255, 215, 0, 0.8);
+            animation: bounce 0.3s ease;
+        }
+
+        /* Bounce animation */
+        @keyframes bounce {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.35); }
+            100% { transform: scale(1); }
+        }
+
+        /* Hover preview styling */
+        .star.preview {
+            color: #ffeaa7 !important;
+        }
+
+        #rating {
+            font-size: 28px;
+            margin-top: 15px;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="rating-container">
+        <div class="stars" id="stars">
+            <span class="star" data-value="1">&#9733;</span>
+            <span class="star" data-value="2">&#9733;</span>
+            <span class="star" data-value="3">&#9733;</span>
+            <span class="star" data-value="4">&#9733;</span>
+            <span class="star" data-value="5">&#9733;</span>
+        </div>
+
+        <span id="rating">Rating: 0 / 5</span>
+    </div>
+
+    <script>
+        const stars = document.querySelectorAll('.star');
+        const ratingDisplay = document.getElementById('rating');
+        let selectedRating = 0;
+
+        // Fill stars
+        function updateStars(rating) {
+            stars.forEach(s => {
+                s.classList.toggle('filled', s.getAttribute('data-value') <= rating);
+            });
+        }
+
+        // Hover Preview
+        stars.forEach(star => {
+            star.addEventListener('mouseover', function () {
+                let hoverValue = this.getAttribute('data-value');
+
+                stars.forEach(s => {
+                    s.classList.toggle('preview', s.getAttribute('data-value') <= hoverValue);
+                });
+            });
+
+            star.addEventListener('mouseout', function () {
+                stars.forEach(s => s.classList.remove('preview'));
+            });
+        });
+
+        // Click to Set Rating
+        stars.forEach(star => {
+            star.addEventListener('click', function () {
+                selectedRating = this.getAttribute('data-value');
+                
+                updateStars(selectedRating);
+                ratingDisplay.textContent = `Rating: ${selectedRating} / 5`;
+            });
+        });
+    </script>
+
+</body>
+</html>
